@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { loadTodos } from "./action";
+import { loadTodos, removeTodo, checkTodo } from "./action";
 import { useDispatch, useSelector } from "react-redux";
+import { Header } from "./components/Header";
 
 export const App = () => {
   const todos = useSelector((state) => state.todos)
@@ -11,16 +12,34 @@ export const App = () => {
     dispatch(loadTodos())
   }, [])
 
+  const handleRemove = (id) => {
+    dispatch(removeTodo(id))
+  }
+
+  const handleChecked = (id, completed) => {
+    dispatch(checkTodo(id, completed))
+  }
+
+
   return (
     <div className="App">
-      <h1>Список дел</h1>
+      <Header />
       <div className="content">
+
         {
           loading ? "Подождите идет загрузка" :
             todos.map((item) => {
               return (
                 <div key={item.id} className="todo" >
+                  <input
+                    type="checkbox"
+                    checked={item.completed}
+                    onChange={() => handleChecked(item.id, item.completed)}
+                  />
                   <span>{item.title}</span>
+                  <button onClick={() => handleRemove(item.id)}>
+                    Delete
+                  </button>
                 </div>
               )
             })

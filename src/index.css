@@ -5,6 +5,7 @@ body {
 
 h1 {
   text-align: center;
+  border-bottom: 1px solid;
 }
 
 .App {
@@ -14,7 +15,6 @@ h1 {
 }
 
 .content {
-  border: 1px solid;
   border-radius: 6px;
   padding: 10px;
 }
@@ -32,4 +32,16 @@ h1 {
 .todo>span {
   flex: 1;
   margin-left: 8px;
+}
+
+.todo>button {
+  width: 140px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.todo>input {
+  transform: scale(1.4);
 }
