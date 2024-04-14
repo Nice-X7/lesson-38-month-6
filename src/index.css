@@ -45,3 +45,7 @@ h1 {
 .todo>input {
   transform: scale(1.4);
 }
+
+.loadProject {
+  margin-left: 420px;
+}
