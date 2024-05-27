@@ -1,27 +1,35 @@
-const startData = {
+import { initialData } from "../components/Types/Types"
+
+const startData: initialData = {
     todos: [],
-    loading: false
+    todosLoading: false,
+    users: [],
+    usersLoad: false
 }
 
-export const reducer = (state = startData, action) => {
+interface Action {
+    type: string
+    payload?: any
+}
+
+export const reducer = (state = startData, action: Action) => {
     switch (action.type) {
         case "load/todos/start":
             return {
-                loading: true
+                ...state,
+                todosLoading: true
             }
 
         case "load/todos/fulfilled":
             return {
-                todos: action.payload
-            }
-
-        case "remove/todo/fulfilled":
-            return {
-                todos: state.todos.filter(todo => todo.id !== action.payload)
+                ...state,
+                todos: action.payload,
+                todosLoading: false
             }
 
         case "remove/todo/start":
             return {
+                ...state,
                 todos: state.todos.map((todo) => {
                     if (todo.id === action.payload) {
                         return {
@@ -34,8 +42,15 @@ export const reducer = (state = startData, action) => {
                 })
             }
 
+        case "remove/todo/fulfilled":
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo.id !== action.payload)
+            }
+
         case "check/todo/start":
             return {
+                ...state,
                 todos: state.todos.map((todo) => {
                     if (todo.id === action.payload) {
                         return {
@@ -50,6 +65,7 @@ export const reducer = (state = startData, action) => {
 
         case "check/todo/fulfilled":
             return {
+                ...state,
                 todos: state.todos.map(todo => {
                     if (todo.id === action.payload) {
                         return {
@@ -61,6 +77,19 @@ export const reducer = (state = startData, action) => {
 
                     return todo
                 })
+            }
+
+        case "load/users/start":
+            return {
+                ...state,
+                usersLoad: true
+            }
+
+        case "load/users/fulfilled":
+            return {
+                ...state,
+                usersLoad: false,
+                users: action.payload
             }
 
         default:

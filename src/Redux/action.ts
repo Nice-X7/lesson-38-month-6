@@ -1,5 +1,9 @@
+import { Dispatch } from "react"
+import { actionType } from "../components/Types/actionTypes"
+
+
 export const loadTodos = () => {
-    return dispatch => {
+    return (dispatch: Dispatch<actionType>): void => {
         dispatch({ type: "load/todos/start" })
 
         fetch("https://jsonplaceholder.typicode.com/todos")
@@ -13,8 +17,8 @@ export const loadTodos = () => {
     }
 }
 
-export const removeTodo = (id) => {
-    return dispatch => {
+export const removeTodo = (id: number) => {
+    return (dispatch: Dispatch<actionType>): void => {
         dispatch({
             type: "remove/todo/start",
             payload: id
@@ -33,8 +37,8 @@ export const removeTodo = (id) => {
     }
 }
 
-export const checkTodo = (id, completed) => {
-    return dispatch => {
+export const checkTodo = (id: number, completed: boolean) => {
+    return (dispatch: Dispatch<actionType>): void => {
         dispatch({
             type: "check/todo/start",
             payload: id
@@ -54,6 +58,21 @@ export const checkTodo = (id, completed) => {
                 dispatch({
                     type: "check/todo/fulfilled",
                     payload: id
+                })
+            })
+    }
+}
+
+export const loadUsers = () => {
+    return (dispatch: Dispatch<actionType>): void => {
+        dispatch({ type: "load/users/start" })
+
+        fetch("https://jsonplaceholder.typicode.com/users")
+            .then((response) => response.json())
+            .then((json) => {
+                dispatch({
+                    type: "load/users/fulfilled",
+                    payload: json
                 })
             })
     }

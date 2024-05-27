@@ -25,12 +25,12 @@ h1 {
   margin-top: 15px;
   border: 1px solid;
   padding: 10px;
+  padding-top: 0;
   border-radius: 8px;
   align-items: center;
 }
 
 .todo>span {
-  flex: 1;
   margin-left: 8px;
 }
 
@@ -48,4 +48,10 @@ h1 {
 
 .loadProject {
   margin-left: 420px;
+}
+
+.text {
+  flex: 1;
+  margin: 20px 0 0 20px;
+  font-size: 18px;
 }
